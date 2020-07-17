@@ -1,0 +1,133 @@
+<!-- 4.캘린더관리 -->
+<!Doctype html>
+<Html lang="en">
+    <Head>
+        <style>
+            .calendar {
+                width: 100%;
+                overflow: visible;
+                text-align: center;
+                display: table;
+                border-collapse: separate;
+                border-spacing: 2px;
+                border-color: grey;
+            }
+            .calendar.week {
+                background: #f1f0f0;
+                color: #515151;
+                font-size: 16px;
+                font-weight: bold;
+                border-bottom: 1px solid #d6d6d6;
+                height: 40px;
+            }
+            .calendar.saturday {
+                background: white;
+                color: #3a87ad;
+                font-size: 16px;
+                font-weight: bold;
+                height: 55px;
+                border: 2px solid #f1f0f0
+            }
+            .calendar.sunday {
+                background: #f1f0f0;
+                color: crimson;
+                font-size: 16px;
+                font-weight: bold;
+                height: 55px;
+                border: 2px solid #f1f0f0
+            }
+            .calendar.today {
+                background: white;
+                color: darkblue;
+                font-size: 16px;
+                font-weight: bold;
+                height: 55px;
+                border: 2px solid darkblue
+            }
+            .calendar.blank {
+                background: white;
+                color: #515151;
+                font-size: 16px;
+                font-weight: bold;
+                height: 55px;
+                border: 2px solid #f1f0f0
+            }
+        </style>
+        <meta charset="utf-8">
+        <title>일정관리</title>
+    </Head>
+
+    <Body>
+    </Body>
+    <script>
+        var calendar = new data();
+        var day_of_week=['일','월','화','수','목','금','토'];
+        var month_of_year=['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'];
+        
+        var year    =calendar.getfullyear();
+        var month   =calendar.getmonth();
+        var today   =calendar.getdata();
+        var weekday =calendar.getday();
+
+                     calendar.setdata(1);
+
+        var days_of_week=7;
+        var days_of_month=31;
+        var str;
+
+        var tr_start="<tr>";
+        var tr_end="</tr>";
+
+        var td_week_start       ="<td class='week'>";
+        var td_blank_start      ="<td class='blank'>";
+        var td_today_start      ="<td class='today'>";
+        var td_day_start        ="<td class='day'>";
+        var td_saturday_start   ="<td class='saturday'>";
+        var td_sunday_start     ="<td class='sunday'>";
+        var td_end              ="</td>";
+
+        str="<table width=500px border=1 cellspacing=0 cellpadding=0 bordercolor=bbb><tr><td style='text-align:center'>";
+        str+="<strong>"+year+"."+month_of_year[month]+"</strong>";
+        str+="<table class='calendar' border=0 cellspacing=0 cellpadding=2>";
+        
+        str += tr_start;
+        for(var i=0; i<days_of_week; ++i) {
+            str+=td_week_start+day_of_week[i]+td_end;
+        }
+        str += tr_end;
+
+        for(var i=0; i<calendar.getday(); ++i) {
+            str+=td_blank_start+td_end;
+        }
+
+        for(var i=0; i<days_of_month;++i) {
+            if(calendar.getdate()>i) {
+                var day = calendar.getdate();
+                var week_day = calendar.getday();
+
+                if(week_day==0) {
+                    str+=tr_start;
+                }
+
+                if(day==today) {
+                    str+=td_today_start+day+td_end;
+                }
+                else {
+                    switch(week_day) {
+                        case 0 : str += td_sunday_start+day+td_end;
+                            break;
+                        case 6 : str += td_saturday_start+day+td_end;
+                                 str+=tr_end;
+                            break;
+                        default : str+=td_day_start+day+td_end;
+                            break;
+                    }
+                }
+            }
+            calendar.setdata(calendar.getdate()+1);
+        }
+        str+="</table></td></tr></table>";
+
+document.write(str);
+
+

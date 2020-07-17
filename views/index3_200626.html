@@ -1,0 +1,24 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p id="kk">hello</p>
+        <input type="button" value="click this!" onclick="test()"/>
+        <input type="button" value="dblclick this!" ondblclick="test2()"/>
+        <input id="textinput" type="text"/>
+        <img id="image" width=150 height=150 src="loan.jpg" style="display:none;">
+    </body>
+    <script>
+        function test() {
+            document.getElementById('image').style.display='block';
+            const tag = document.getElementById('kk'); 
+            // document object model(DOM)
+            tag.innerhtml += document.getElementById('textinput').value;   
+            alert(tag.innerhtml);    
+        }
+        function test2() {
+            alert('haha');            
+        }
+    </script>
+</html>
