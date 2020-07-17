@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('처음이에용:)');
+  res.send('처음이에용:) 안뇽');
 });
 
 router.get('/bbb', function(req, res, next) {
